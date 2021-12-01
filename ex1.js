@@ -7,6 +7,7 @@ window.onload = () => {
 
 
 
+let readyImageArray = []
 
 async function fetchImages(query) {
     
@@ -22,9 +23,8 @@ async function fetchImages(query) {
             })
 
     let data = await response.json()
-    let photos = data.photos
-    
-    console.log(photos)
+    readyImageArray.push(data.photos)
+    console.log(readyImageArray)
 
     return data
 }
@@ -34,7 +34,34 @@ let loadButton = document.querySelector('.btn-primary')
 loadButton.addEventListener('click', () => {
     let card = ''
     let inputValue = document.querySelector('.input-search').value
+    let boardNode = document.querySelector('.album')
     fetchImages(inputValue)
-    
 
+    readyImageArray.forEach(photo => {
+        console.log(photo.photos)
+        card = `
+        <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+        <img src="${photo.photos.src.medium}" class="card-img-top" onclick="getModalData(event)" alt="...">
+            <div class="card-body">
+            <p class="card-text">
+            ${photo.photographer}
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                    View
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                    Hide
+                </button>
+                </div>
+                <small class="text-muted">${photo.id}</small>
+            </div>
+            </div>
+        </div>
+        </div>
+        `
+    })
+    boardNode.innerHTML = card
 })
