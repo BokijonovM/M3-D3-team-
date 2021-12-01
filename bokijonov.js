@@ -45,7 +45,7 @@ const singleCard = (photo) => {
                     View
                 </button>
                 <button type="button" class="btn btn-sm btn-outline-secondary">
-                    Edit
+                    Hide
                 </button>
                 </div>
                 <small class="text-muted">${photo.id}</small>
