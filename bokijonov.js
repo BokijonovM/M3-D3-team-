@@ -26,7 +26,7 @@ const mysearchResult = (event) => {
 
 window.onload = () => {
 
-    myFetch('horse')
+    myFetch('animals')
 
 }
 
